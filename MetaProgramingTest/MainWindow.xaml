@@ -1,0 +1,217 @@
+﻿<Window x:Class="MetaProgramingTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:local="clr-namespace:MetaProgramingTest"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        Title="ProgramingHelper"
+        Width="1024"
+        Height="640"
+        FontFamily="Meiryo UI"
+        mc:Ignorable="d">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <local:PropertyCodeStrategy x:Key="PropertyStrategy" />
+        <local:CommandCodeStrategy x:Key="CommandStrategy" />
+        <local:ConstructerCodeStrategy x:Key="ConstructerStrategy"/>
+        <local:DisposeCodeStrategy x:Key="DisposeStrategy"/>
+        <ObjectDataProvider x:Key="SuffixTypes"
+                            MethodName="GetValues"
+                            ObjectType="{x:Type system:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:SuffixType" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger>
+            <i:InvokeCommandAction Command="{Binding StrategyChangeCommand, Mode=OneWay}" CommandParameter="{Binding Mode=OneWay, Source={StaticResource PropertyStrategy}}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Window.DataContext>
+        <local:MainViewModel />
+    </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding ExecutingActionCommand,
+                                      Mode=OneWay}"
+                    CommandParameter="{Binding ElementName=textBox,
+                                               Mode=OneWay}"
+                    Gesture="F5" />
+    </Window.InputBindings>
+    <DockPanel Margin="0" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition">
+        <StatusBar DockPanel.Dock="Bottom"
+                   FontFamily="Meiryo UI"
+                   d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition">
+            <StatusBarItem HorizontalAlignment="Right">
+                <ResizeGrip x:Name="resizeGrip" />
+            </StatusBarItem>
+        </StatusBar>
+        <Menu x:Name="menu"
+              DockPanel.Dock="Top"
+              FontFamily="Meiryo UI">
+            <MenuItem Margin="2" Header="ファイル(_F)">
+                <MenuItem Header="終了(_Q)" />
+            </MenuItem>
+            <MenuItem Margin="2" Header="アクション(_A)">
+                <MenuItem Command="{Binding ExecutingActionCommand,
+                                            Mode=OneWay}"
+                          CommandParameter="{Binding ElementName=textBox,
+                                                     Mode=OneWay}"
+                          Header="実行(_X)"
+                          InputGestureText="F5" />
+            </MenuItem>
+        </Menu>
+        <ToolBar x:Name="toolBar"
+                 VerticalAlignment="Top"
+                 DockPanel.Dock="Top">
+            <RadioButton x:Name="radioButton"
+                         Margin="2"
+                         HorizontalAlignment="Stretch"
+                         VerticalAlignment="Stretch"
+                         Command="{Binding StrategyChangeCommand,
+                                           Mode=OneWay}"
+                         CommandParameter="{Binding Mode=OneWay,
+                                                    Source={StaticResource PropertyStrategy}}"
+                         Content="プロパティ"
+                         IsChecked="True" />
+            <RadioButton x:Name="radioButton2"
+                         Margin="2"
+                         HorizontalAlignment="Stretch"
+                         VerticalAlignment="Stretch"
+                         Command="{Binding StrategyChangeCommand,
+                                           Mode=OneWay}"
+                         CommandParameter="{Binding Mode=OneWay,
+                                                    Source={StaticResource CommandStrategy}}"
+                         Content="コマンド" />
+            <RadioButton x:Name="radioButton3"
+            	Margin="2"
+            	HorizontalAlignment="Stretch"
+            	VerticalAlignment="Stretch"
+            	Command="{Binding StrategyChangeCommand, Mode=OneWay}"
+            	CommandParameter="{Binding Mode=OneWay, Source={StaticResource ConstructerStrategy}}"
+            	Content="コンストラクタ" />
+            <RadioButton x:Name="radioButton4"
+            	Margin="2"
+            	HorizontalAlignment="Stretch"
+            	VerticalAlignment="Stretch"
+            	Command="{Binding StrategyChangeCommand, Mode=OneWay}"
+            	CommandParameter="{Binding Mode=OneWay, Source={StaticResource DisposeStrategy}}"
+            	Content="Dispose" />
+        </ToolBar>
+        <StatusBar VerticalAlignment="Top"
+                   DockPanel.Dock="Top"
+                   FontFamily="Meiryo UI">
+            <StatusBarItem Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=radioButton}">
+                <StackPanel Orientation="Horizontal">
+                    <ToggleButton x:Name="propToggleButton1"
+                                  Margin="2"
+                                  Command="{Binding ExecutingActionCommand,
+                                                    Mode=OneWay}"
+                                  CommandParameter="{Binding ElementName=textBox,
+                                                             Mode=OneWay}"
+                                  Content="IsReadOnly"
+                                  IsChecked="{Binding IsReadOnly,
+                                                      Source={StaticResource PropertyStrategy}}"
+                                  Padding="2" />
+                    <ToggleButton x:Name="propToggleButton2"
+                                  Margin="2"
+                                  Command="{Binding ExecutingActionCommand,
+                                                    Mode=OneWay}"
+                                  CommandParameter="{Binding ElementName=textBox,
+                                                             Mode=OneWay}"
+                                  Content="UseOnPropertyChanged"
+                                  IsChecked="{Binding UseOnPropertyChanged,
+                                                      Source={StaticResource PropertyStrategy}}"
+                                  Padding="2" />
+                    <ToggleButton x:Name="propToggleButton3"
+                    	Margin="2"
+                    	Command="{Binding ExecutingActionCommand, Mode=OneWay}"
+                    	CommandParameter="{Binding ElementName=textBox, Mode=OneWay}"
+                    	Content="UsePropertyGroup"
+                    	IsChecked="{Binding UsePropertyGroup, Source={StaticResource PropertyStrategy}}"
+                    	Padding="2" />
+                    <ToggleButton x:Name="propToggleButton4"
+                    	Margin="2"
+                    	Command="{Binding ExecutingActionCommand, Mode=OneWay}"
+                    	CommandParameter="{Binding ElementName=textBox, Mode=OneWay}"
+                    	Content="UseDataMember"
+                    	IsChecked="{Binding UseDataMember, Source={StaticResource PropertyStrategy}}"
+                    	Padding="2" />
+                    <ToggleButton x:Name="propToggleButton5"
+                    	Margin="2"
+                    	Command="{Binding ExecutingActionCommand, Mode=OneWay}"
+                    	CommandParameter="{Binding ElementName=textBox, Mode=OneWay}"
+                    	Content="IsOmmittingCode"
+                    	IsChecked="{Binding IsOmmittingCode, Source={StaticResource PropertyStrategy}}"
+                    	Padding="2" />
+                </StackPanel>
+            </StatusBarItem>
+            <StatusBarItem Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=radioButton2}">
+                <StackPanel Orientation="Horizontal">
+                    <ToggleButton x:Name="toggleButton1"
+                                  Margin="2"
+                                  Command="{Binding ExecutingActionCommand,
+                                                    Mode=OneWay}"
+                                  CommandParameter="{Binding ElementName=textBox,
+                                                             Mode=OneWay}"
+                                  Content="UseParameter"
+                                  IsChecked="{Binding UseParameter,
+                                                      Source={StaticResource CommandStrategy}}"
+                                  Padding="2" />
+                    <ComboBox x:Name="comboBox"
+                              Margin="2"
+                              ItemsSource="{Binding Mode=OneWay,
+                                                    Source={StaticResource SuffixTypes}}"
+                              MaxDropDownHeight="397"
+                              SelectedValue="{Binding AppendingSuffix,
+                                                      Source={StaticResource CommandStrategy}}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding ExecutingActionCommand, Mode=OneWay}" CommandParameter="{Binding ElementName=textBox, Mode=OneWay}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                </StackPanel>
+            </StatusBarItem>
+        </StatusBar>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Border Margin="0"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                <ScrollViewer>
+                    <TextBox x:Name="textBox"
+                             Margin="0"
+                             AcceptsReturn="True"
+                             AcceptsTab="True"
+                             AutoWordSelection="True"
+                             FontFamily="MS Gothic"
+                             TextWrapping="Wrap" />
+                </ScrollViewer>
+            </Border>
+            <GridSplitter x:Name="gridSplitter"
+                          Grid.Column="1"
+                          Width="2"
+                          HorizontalAlignment="Stretch" />
+            <Border Grid.Column="2"
+                    Margin="0"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                <ScrollViewer>
+                    <TextBox x:Name="textBox1"
+                             Margin="0"
+                             FontFamily="MS Gothic"
+                             Text="{Binding ResultCode}"
+                             TextWrapping="Wrap" />
+                </ScrollViewer>
+            </Border>
+        </Grid>
+    </DockPanel>
+</Window>
