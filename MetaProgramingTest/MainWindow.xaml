@@ -16,8 +16,8 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <local:PropertyCodeStrategy x:Key="PropertyStrategy" />
         <local:CommandCodeStrategy x:Key="CommandStrategy" />
-        <local:ConstructerCodeStrategy x:Key="ConstructerStrategy"/>
-        <local:DisposeCodeStrategy x:Key="DisposeStrategy"/>
+        <local:ConstructerCodeStrategy x:Key="ConstructerStrategy" />
+        <local:DisposeCodeStrategy x:Key="DisposeStrategy" />
         <ObjectDataProvider x:Key="SuffixTypes"
                             MethodName="GetValues"
                             ObjectType="{x:Type system:Enum}">
@@ -87,19 +87,23 @@
                                                     Source={StaticResource CommandStrategy}}"
                          Content="コマンド" />
             <RadioButton x:Name="radioButton3"
-            	Margin="2"
-            	HorizontalAlignment="Stretch"
-            	VerticalAlignment="Stretch"
-            	Command="{Binding StrategyChangeCommand, Mode=OneWay}"
-            	CommandParameter="{Binding Mode=OneWay, Source={StaticResource ConstructerStrategy}}"
-            	Content="コンストラクタ" />
+                         Margin="2"
+                         HorizontalAlignment="Stretch"
+                         VerticalAlignment="Stretch"
+                         Command="{Binding StrategyChangeCommand,
+                                           Mode=OneWay}"
+                         CommandParameter="{Binding Mode=OneWay,
+                                                    Source={StaticResource ConstructerStrategy}}"
+                         Content="コンストラクタ" />
             <RadioButton x:Name="radioButton4"
-            	Margin="2"
-            	HorizontalAlignment="Stretch"
-            	VerticalAlignment="Stretch"
-            	Command="{Binding StrategyChangeCommand, Mode=OneWay}"
-            	CommandParameter="{Binding Mode=OneWay, Source={StaticResource DisposeStrategy}}"
-            	Content="Dispose" />
+                         Margin="2"
+                         HorizontalAlignment="Stretch"
+                         VerticalAlignment="Stretch"
+                         Command="{Binding StrategyChangeCommand,
+                                           Mode=OneWay}"
+                         CommandParameter="{Binding Mode=OneWay,
+                                                    Source={StaticResource DisposeStrategy}}"
+                         Content="Dispose" />
         </ToolBar>
         <StatusBar VerticalAlignment="Top"
                    DockPanel.Dock="Top"
@@ -127,26 +131,45 @@
                                                       Source={StaticResource PropertyStrategy}}"
                                   Padding="2" />
                     <ToggleButton x:Name="propToggleButton3"
-                    	Margin="2"
-                    	Command="{Binding ExecutingActionCommand, Mode=OneWay}"
-                    	CommandParameter="{Binding ElementName=textBox, Mode=OneWay}"
-                    	Content="UsePropertyGroup"
-                    	IsChecked="{Binding UsePropertyGroup, Source={StaticResource PropertyStrategy}}"
-                    	Padding="2" />
+                                  Margin="2"
+                                  Command="{Binding ExecutingActionCommand,
+                                                    Mode=OneWay}"
+                                  CommandParameter="{Binding ElementName=textBox,
+                                                             Mode=OneWay}"
+                                  Content="UsePropertyGroup"
+                                  IsChecked="{Binding UsePropertyGroup,
+                                                      Source={StaticResource PropertyStrategy}}"
+                                  Padding="2" />
                     <ToggleButton x:Name="propToggleButton4"
-                    	Margin="2"
-                    	Command="{Binding ExecutingActionCommand, Mode=OneWay}"
-                    	CommandParameter="{Binding ElementName=textBox, Mode=OneWay}"
-                    	Content="UseDataMember"
-                    	IsChecked="{Binding UseDataMember, Source={StaticResource PropertyStrategy}}"
-                    	Padding="2" />
+                                  Margin="2"
+                                  Command="{Binding ExecutingActionCommand,
+                                                    Mode=OneWay}"
+                                  CommandParameter="{Binding ElementName=textBox,
+                                                             Mode=OneWay}"
+                                  Content="UseDataMember"
+                                  IsChecked="{Binding UseDataMember,
+                                                      Source={StaticResource PropertyStrategy}}"
+                                  Padding="2" />
                     <ToggleButton x:Name="propToggleButton5"
-                    	Margin="2"
-                    	Command="{Binding ExecutingActionCommand, Mode=OneWay}"
-                    	CommandParameter="{Binding ElementName=textBox, Mode=OneWay}"
-                    	Content="IsOmmittingCode"
-                    	IsChecked="{Binding IsOmmittingCode, Source={StaticResource PropertyStrategy}}"
-                    	Padding="2" />
+                                  Margin="2"
+                                  Command="{Binding ExecutingActionCommand,
+                                                    Mode=OneWay}"
+                                  CommandParameter="{Binding ElementName=textBox,
+                                                             Mode=OneWay}"
+                                  Content="IsOmmittingCode"
+                                  IsChecked="{Binding IsOmmittingCode,
+                                                      Source={StaticResource PropertyStrategy}}"
+                                  Padding="2" />
+                    <ToggleButton x:Name="propToggleButton6"
+                                  Margin="2"
+                                  Command="{Binding ExecutingActionCommand,
+                                                    Mode=OneWay}"
+                                  CommandParameter="{Binding ElementName=textBox,
+                                                             Mode=OneWay}"
+                                  Content="IsDependencyProperty"
+                                  IsChecked="{Binding IsDependencyProperty,
+                                                      Source={StaticResource PropertyStrategy}}"
+                                  Padding="2" />
                 </StackPanel>
             </StatusBarItem>
             <StatusBarItem Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=radioButton2}">

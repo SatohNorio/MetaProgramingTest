@@ -67,6 +67,7 @@ namespace MetaProgramingTest
 			var comment = "○○";
 			var commentSub = "";
 			var type = "int";
+			var nmClass = "Hoge";
 			if (0 < args.Length && !String.IsNullOrEmpty(args[0]))
 			{
 				name = args[0];
@@ -83,6 +84,10 @@ namespace MetaProgramingTest
 			{
 				type = args[3];
 			}
+			if (4 < args.Length && !String.IsNullOrEmpty(args[4]))
+			{
+				nmClass = args[4];
+			}
 
 			var sb = new StringBuilder(2000);
 			if (!this.UsePropertyGroup)
@@ -90,10 +95,15 @@ namespace MetaProgramingTest
 				sb.Append("// ------------------------------------------------------------------------------------------------------------\r\n");
 				sb.Append("#region ");
 				sb.Append(name);
-				sb.Append(" プロパティ\r\n");
+				sb.Append(" プロパティ");
+				if (this.IsDependencyProperty)
+				{
+					sb.Append("（依存関係プロパティ）");
+				}
+				sb.Append("\r\n");
 			}
 			sb.Append("\r\n");
-			if (!this.IsOmmittingCode)
+			if (!this.IsOmmittingCode&&!this.IsDependencyProperty)
 			{
 				sb.Append("/// <summary>\r\n");
 				sb.Append("/// ");
@@ -139,6 +149,35 @@ namespace MetaProgramingTest
 					sb.Append("set; ");
 				}
 				sb.Append("}\r\n");
+			}
+			else if (this.IsDependencyProperty)
+			{
+				sb.Append("{\r\n");
+				sb.Append("get{ return (");
+				sb.Append(type);
+				sb.Append(")GetValue(");
+				sb.Append(name);
+				sb.Append("Property); }\r\n");
+				sb.Append("set{ SetValue( ");
+				sb.Append(name);
+				sb.Append("Property, value); }\r\n");
+				sb.Append("}\r\n");
+				sb.Append("\r\n");
+				sb.Append("/// <summary>\r\n");
+				sb.Append("/// ");
+				sb.Append(comment);
+				sb.Append(" を管理する依存関係プロパティ\r\n");
+				sb.Append("/// </summary>\r\n");
+				sb.Append("public static readonly DependencyProperty ");
+				sb.Append(name);
+				sb.Append("Property =\r\n");
+				sb.Append("    DependencyProperty.Register(\"");
+				sb.Append(name);
+				sb.Append("\", typeof(");
+				sb.Append(type);
+				sb.Append("), typeof(");
+				sb.Append(nmClass);
+				sb.Append("), new PropertyMetadata(null));\r\n");
 			}
 			else
 			{
@@ -211,6 +250,11 @@ namespace MetaProgramingTest
 		/// get set のコード部分の省略可能状態 を取得または設定します。
 		/// </summary>
 		public bool IsOmmittingCode { get; set; }
+
+		/// <summary>
+		/// 依存関係プロパティかどうか を取得または設定します。
+		/// </summary>
+		public bool IsDependencyProperty { get; set; }
 
 		#endregion // オプション
 		// ------------------------------------------------------------------------------------------------------------
