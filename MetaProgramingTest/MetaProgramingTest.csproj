@@ -57,10 +57,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Strategies\BehaviorCodeStrategy.cs" />
     <Compile Include="Strategies\ConstructerCodeStrategy.cs" />
     <Compile Include="Strategies\DisposeCodeStrategy.cs" />
     <Compile Include="Strategies\CommandCodeStrategy.cs" />
     <Compile Include="Strategies\PropertyCodeStrategy.cs" />
+    <Compile Include="Strategies\TriggerActionCodeStrategy.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

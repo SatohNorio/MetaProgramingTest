@@ -18,6 +18,8 @@
         <local:CommandCodeStrategy x:Key="CommandStrategy" />
         <local:ConstructerCodeStrategy x:Key="ConstructerStrategy" />
         <local:DisposeCodeStrategy x:Key="DisposeStrategy" />
+        <local:TriggerActionCodeStrategy x:Key="TriggerActionStrategy" />
+        <local:BehaviorCodeStrategy x:Key="BehaviorStrategy" />
         <ObjectDataProvider x:Key="SuffixTypes"
                             MethodName="GetValues"
                             ObjectType="{x:Type system:Enum}">
@@ -104,6 +106,24 @@
                          CommandParameter="{Binding Mode=OneWay,
                                                     Source={StaticResource DisposeStrategy}}"
                          Content="Dispose" />
+            <RadioButton x:Name="radioButton5"
+                         Margin="0,2"
+                         HorizontalAlignment="Stretch"
+                         VerticalAlignment="Stretch"
+                         Command="{Binding StrategyChangeCommand,
+                                           Mode=OneWay}"
+                         CommandParameter="{Binding Mode=OneWay,
+                                                    Source={StaticResource TriggerActionStrategy}}"
+                         Content="TriggerAction" />
+            <RadioButton x:Name="radioButton6"
+                         Margin="0,2"
+                         HorizontalAlignment="Stretch"
+                         VerticalAlignment="Stretch"
+                         Command="{Binding StrategyChangeCommand,
+                                           Mode=OneWay}"
+                         CommandParameter="{Binding Mode=OneWay,
+                                                    Source={StaticResource BehaviorStrategy}}"
+                         Content="Behavior" />
         </ToolBar>
         <StatusBar VerticalAlignment="Top"
                    DockPanel.Dock="Top"
