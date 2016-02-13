@@ -48,7 +48,7 @@ namespace MetaProgramingTest
 			if (this.UsePropertyGroup)
 			{
 				sb.Append("\r\n");
-				sb.Append("#endregion // ");
+				sb.Append("#endregion ");
 				sb.Append(name);
 				sb.Append("\r\n");
 				sb.Append("// ------------------------------------------------------------------------------------------------------------\r\n");
@@ -214,7 +214,7 @@ namespace MetaProgramingTest
 			if (!this.UsePropertyGroup)
 			{
 				sb.Append("\r\n");
-				sb.Append("#endregion // ");
+				sb.Append("#endregion ");
 				sb.Append(name);
 				sb.Append(" プロパティ\r\n");
 				sb.Append("// ------------------------------------------------------------------------------------------------------------\r\n");

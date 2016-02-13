@@ -100,7 +100,7 @@ namespace MetaProgramingTest
 			sb.Append("    GC.SuppressFinalize(this);\r\n");
 			sb.Append("}\r\n");
 			sb.Append("\r\n");
-			sb.Append("#endregion // Dispose\r\n");
+			sb.Append("#endregion Dispose\r\n");
 			sb.Append("// ------------------------------------------------------------------------------------------------------------\r\n");
 			return sb.ToString();
 		}

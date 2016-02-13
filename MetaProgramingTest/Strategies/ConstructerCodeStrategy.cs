@@ -64,7 +64,7 @@ namespace MetaProgramingTest
 			sb.Append("{\r\n");
 			sb.Append("}\r\n");
 			sb.Append("\r\n");
-			sb.Append("#endregion // コンストラクタ\r\n");
+			sb.Append("#endregion コンストラクタ\r\n");
 			sb.Append("// ------------------------------------------------------------------------------------------------------------\r\n");
 			return sb.ToString();
 		}

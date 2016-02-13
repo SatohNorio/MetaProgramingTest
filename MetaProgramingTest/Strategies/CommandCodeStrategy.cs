@@ -175,7 +175,7 @@ namespace MetaProgramingTest
 			sb.Append("    return true;\r\n");
 			sb.Append("}\r\n");
 			sb.Append("\r\n");
-			sb.Append("#endregion // ");
+			sb.Append("#endregion ");
 			sb.Append(name);
 			sb.Append("コマンド\r\n");
 			sb.Append("// ------------------------------------------------------------------------------------------------------------\r\n");

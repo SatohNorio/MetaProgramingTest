@@ -100,7 +100,7 @@ namespace MetaProgramingTest
             sb.Append("    {\r\n");
             sb.Append("    }\r\n");
             sb.Append("\r\n");
-            sb.Append("    #endregion // コンストラクタ\r\n");
+            sb.Append("    #endregion コンストラクタ\r\n");
             sb.Append("    // ------------------------------------------------------------------------------------------------------------\r\n");
             sb.Append("\r\n");
             sb.Append("    /// <summary>\r\n");
