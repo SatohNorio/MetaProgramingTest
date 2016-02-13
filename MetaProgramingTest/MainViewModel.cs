@@ -8,6 +8,8 @@ using System.Windows;
 using System.Windows.Controls;
 
 using Ns.Common;
+using System.Reflection;
+using System.Diagnostics;
 
 namespace MetaProgramingTest
 {
@@ -144,6 +146,28 @@ namespace MetaProgramingTest
 		}
 
 		#endregion
+		// ------------------------------------------------------------------------------------------------------------
+		// ------------------------------------------------------------------------------------------------------------
+		#region ステータスバー
+
+		/// <summary>
+		/// バージョン情報 を取得します。
+		/// </summary>
+		public string AssemblyVersion
+		{
+			get
+			{
+				string rtVersion = "";
+				var asm = Assembly.GetEntryAssembly();
+				if (asm != null)
+				{
+					rtVersion = "Ver." + asm.GetName().Version;
+				}
+				return rtVersion;
+			}
+		}
+
+		#endregion ステータスバー
 		// ------------------------------------------------------------------------------------------------------------
 	}
 }

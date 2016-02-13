@@ -103,7 +103,7 @@ namespace MetaProgramingTest
 				sb.Append("\r\n");
 			}
 			sb.Append("\r\n");
-			if (!this.IsOmmittingCode&&!this.IsDependencyProperty)
+			if (!this.IsOmmittingCode && !this.IsDependencyProperty)
 			{
 				sb.Append("/// <summary>\r\n");
 				sb.Append("/// ");
@@ -144,10 +144,11 @@ namespace MetaProgramingTest
 			if (this.IsOmmittingCode)
 			{
 				sb.Append("{ get; ");
-				if (!this.IsReadOnly)
+				if (this.IsReadOnly)
 				{
-					sb.Append("set; ");
+					sb.Append("private ");
 				}
+				sb.Append("set; ");
 				sb.Append("}\r\n");
 			}
 			else if (this.IsDependencyProperty)

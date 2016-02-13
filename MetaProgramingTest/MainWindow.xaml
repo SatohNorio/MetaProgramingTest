@@ -47,6 +47,9 @@
         <StatusBar DockPanel.Dock="Bottom"
                    FontFamily="Meiryo UI"
                    d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition">
+            <StatusBarItem>
+                <TextBlock FontFamily="Meiryo UI" Text="{Binding AssemblyVersion}" />
+            </StatusBarItem>
             <StatusBarItem HorizontalAlignment="Right">
                 <ResizeGrip x:Name="resizeGrip" />
             </StatusBarItem>
